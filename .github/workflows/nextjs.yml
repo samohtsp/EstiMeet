@@ -34,20 +34,19 @@ jobs:
 
       - name: Detect package manager
         id: detect-package-manager
-        working-directory: EstiMeet/estimeet
+        
         run: |
-          if [ -f "EstiMeet/estimeet/yarn.lock" ]; then
+          if [ -f "**/${{ github.workspace }}/estimeet/yarn.lock" ]; then
             echo "manager=yarn" >> $GITHUB_OUTPUT
             echo "command=install" >> $GITHUB_OUTPUT
             echo "runner=yarn" >> $GITHUB_OUTPUT
             exit 0
-          elif [ -f "EstiMeet/estimeet/package.json" ]; then
+          elif [ -f "**/${{ github.workspace }}/estimeet/package.json" ]; then
             echo "manager=npm" >> $GITHUB_OUTPUT
             echo "command=ci" >> $GITHUB_OUTPUT
             echo "runner=npx --no-install" >> $GITHUB_OUTPUT
             exit 0
           else
-            echo "${{ github.workspace }}"
             echo "Unable to determine package manager"
             exit 1
           fi
