@@ -12,7 +12,7 @@ const fetchRoles = async (): Promise<Role[]> => {
   return [
     { title: 'Manager', price: 500 },
     { title: 'Developer', price: 400 },
-    { title: 'Tech Leas', price: 450 },
+    { title: 'Tech Lead', price: 450 },
   ];
 };
 
