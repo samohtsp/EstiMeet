@@ -1,47 +1,51 @@
 // src/components/HomePage.tsx
-
 "use client";
 
 import React, { useState } from 'react';
-import { Role } from '../models/role'; // Assurez-vous que le chemin est correct
+// import '../styles/globals.css';
+import RoleList from '../components/RoleList.component/RoleList';  
+import { Role } from '../models/role';
+
+const fetchRoles = async (): Promise<Role[]> => {
+  // Simuler la récupération de rôles depuis le backend ou le store
+  // Remplacez cette partie par la logique réelle de récupération des données
+  return [
+    { title: 'Manager', price: 500 },
+    { title: 'Developer', price: 400 },
+    { title: 'Tech Leas', price: 450 },
+  ];
+};
 
 const HomePage = () => {
   const [meetingNotes, setMeetingNotes] = useState('');
   const [meetingTitle, setMeetingTitle] = useState('');
   const [emailList, setEmailList] = useState('');
 
-  // Exemple d'utilisation du type Role
-  const roles: Role[] = [
-    { title: 'Manager', price: 5000 },
-    { title: 'Developer', price: 4000 },
-  ];
-
   const handleSendEmail = () => {
     const emails = emailList.split(',').map(email => email.trim());
-    // Simuler l'envoi d'email (remplacer cela par une véritable logique d'envoi d'email côté serveur)
     console.log('Envoyer le compte rendu à :', emails);
     console.log('Compte rendu :', meetingNotes);
     alert('Compte rendu envoyé aux emails spécifiés.');
   };
 
   return (
-    <div className="container">
+    <div className="page-container">
       <input
-      type='text' 
-        placeholder="Titre de la réunion" 
+        type='text'
+        placeholder="Titre de la réunion"
         value={meetingTitle}
         onChange={(e) => setMeetingTitle(e.target.value)}
         className="title-input"
       />
-      <textarea 
+      <textarea
         className="resume-container"
-        placeholder="Ordre du jours" 
+        placeholder="Ordre du jour"
         value={meetingNotes}
         onChange={(e) => setMeetingNotes(e.target.value)}
       />
-      <input 
-        type="text" 
-        placeholder="Emails (séparés par des virgules)" 
+      <input
+        type="text"
+        placeholder="Emails (séparés par des virgules)"
         value={emailList}
         onChange={(e) => setEmailList(e.target.value)}
         className="email-input"
@@ -50,16 +54,7 @@ const HomePage = () => {
         Envoyer le compte rendu
       </button>
 
-      <div className="roles-list">
-        <h3>Roles:</h3>
-        <ul>
-          {roles.map((role, index) => (
-            <li key={index}>
-              {role.title} - ${role.price}
-            </li>
-          ))}
-        </ul>
-      </div>
+      <RoleList fetchRoles={fetchRoles} />
     </div>
   );
 };

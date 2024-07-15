@@ -1,0 +1,30 @@
+/* src/components/RoleList.css */
+
+.roles-list {
+    margin-top: 20px;
+  }
+  
+  .roles-list h3 {
+    margin-bottom: 10px;
+  }
+  
+  .roles-list ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .roles-list li {
+    margin: 5px 0;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  
+  .role-input,
+  .price-input,
+  .add-role-button {
+    margin: 10px 0;
+    padding: 10px;
+    width: 300px;
+  }
+  
