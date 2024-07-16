@@ -46,16 +46,16 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20"
-          cache: ${{ env.manager }}
+          cache: ${{ steps.detect-package-manager.outputs.manager }}
 
       - name: Install dependencies
         working-directory: estimeet
-        run: ${{ env.manager }} ${{ env.command }}
+        run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
 
       - name: Check installed packages
         working-directory: estimeet
         run: |
-          if [ "${{ env.manager }}" = "yarn" ]; then
+          if [ "${{ steps.detect-package-manager.outputs.manager }}" = "yarn" ]; then
             yarn list
           else
             npm list
