@@ -19,4 +19,4 @@ const nextConfig = {
 //   basePath: basePath,
 //   trailingSlash: true,
 // };
-module.exports = nextConfig;
+export default nextConfig;
