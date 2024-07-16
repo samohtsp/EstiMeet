@@ -65,10 +65,6 @@ jobs:
         working-directory: estimeet
         run: npx next build
 
-      - name: Export Next.js
-        working-directory: estimeet
-        run: npx next export
-
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

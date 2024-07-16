@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+    output: 'export',
+};
 
 
 // const isGithubActions = process.env.GITHUB_ACTIONS || false;
@@ -17,4 +19,4 @@ const nextConfig = {};
 //   basePath: basePath,
 //   trailingSlash: true,
 // };
-export default nextConfig;
+module.exports = nextConfig;
