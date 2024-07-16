@@ -1,0 +1,10 @@
+<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Cercle noir -->
+  <circle cx="50" cy="50" r="50" fill="black" />
+  
+  <!-- Lettre E -->
+  <text x="30" y="65" font-family="Arial, sans-serif" font-size="40" fill="yellow">E</text>
+  
+  <!-- Symbole $ -->
+  <text x="55" y="65" font-family="Arial, sans-serif" font-size="40" fill="yellow">$</text>
+</svg>
