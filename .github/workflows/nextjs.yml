@@ -36,17 +36,17 @@ jobs:
         run: |
           pwd
           ls -la
-          ls -la EstiMeet/estimeet
+          ls -la estimeet
 
       - name: Detect package manager
         id: detect-package-manager
         run: |
           echo "Current directory: $(pwd)"
-          if [ -f "EstiMeet/estimeet/yarn.lock" ]; then
+          if [ -f "estimeet/yarn.lock" ]; then
             echo "manager=yarn" >> $GITHUB_ENV
             echo "command=install" >> $GITHUB_ENV
             echo "runner=yarn" >> $GITHUB_ENV
-          elif [ -f "EstiMeet/estimeet/package.json" ]; then
+          elif [ -f "estimeet/package.json" ]; then
             echo "manager=npm" >> $GITHUB_ENV
             echo "command=ci" >> $GITHUB_ENV
             echo "runner=npx --no-install" >> $GITHUB_ENV
