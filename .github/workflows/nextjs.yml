@@ -50,7 +50,7 @@ jobs:
 
       - name: Install dependencies
         working-directory: estimeet
-        run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
+        run: npm ci
 
       - name: Check installed packages
         working-directory: estimeet
