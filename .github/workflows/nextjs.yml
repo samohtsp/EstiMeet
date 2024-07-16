@@ -32,15 +32,24 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Print current directory and list files
+        run: |
+          pwd
+          ls -la
+          ls -la EstiMeet/estimeet
+
       - name: Detect package manager
         id: detect-package-manager
-        
         run: |
-          if [ -f "${{ runner.workspace }}/estimeet/package.json" ]; then
-            echo "manager=npm" >> $GITHUB_OUTPUT
-            echo "command=ci" >> $GITHUB_OUTPUT
-            echo "runner=npx --no-install" >> $GITHUB_OUTPUT
-            exit 0
+          echo "Current directory: $(pwd)"
+          if [ -f "EstiMeet/estimeet/yarn.lock" ]; then
+            echo "manager=yarn" >> $GITHUB_ENV
+            echo "command=install" >> $GITHUB_ENV
+            echo "runner=yarn" >> $GITHUB_ENV
+          elif [ -f "EstiMeet/estimeet/package.json" ]; then
+            echo "manager=npm" >> $GITHUB_ENV
+            echo "command=ci" >> $GITHUB_ENV
+            echo "runner=npx --no-install" >> $GITHUB_ENV
           else
             echo "Unable to determine package manager"
             exit 1
