@@ -3,12 +3,12 @@
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
-    basePath: process.env.NODE_ENV === 'production' ? '/Estimeet' : '',
-    assetPrefix: process.env.NODE_ENV === 'production' ? '/Estimeet' : '',
+    basePath: process.env.NODE_ENV === 'production' ? '' : '',
+    assetPrefix: process.env.NODE_ENV === 'production' ? '' : '',
     trailingSlash: true,
-    output: 'export',
     images: {
         unoptimized: true,
     },
+    output: 'export'
 };
 export default nextConfig;
