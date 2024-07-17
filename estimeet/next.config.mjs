@@ -1,22 +1,11 @@
+// next.config.js
+
 /** @type {import('next').NextConfig} */
+
 const nextConfig = {
-    output: 'export',
+    basePath:  process.env.DEPLOYED_GITHUB_PATH || '/Estimeet',
+    assetPrefix: '/Estimeet/',
+    trailingSlash: true,
+    output: 'export'
 };
-
-
-// const isGithubActions = process.env.GITHUB_ACTIONS || false;
-// let assetPrefix = '';
-// let basePath = '';
-
-// if (isGithubActions) {
-//   const repo = process.env.GITHUB_REPOSITORY.replace(/.*?\//, '');
-//   assetPrefix = `/${repo}/`;
-//   basePath = `/${repo}`;
-// }
-
-// module.exports = {
-//   assetPrefix: assetPrefix,
-//   basePath: basePath,
-//   trailingSlash: true,
-// };
 export default nextConfig;
