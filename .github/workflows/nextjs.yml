@@ -44,7 +44,7 @@ jobs:
         working-directory: estimeet
         run: |
           export NODE_ENV=production
-          export DEPLOYED_GITHUB_PATH=''
+          export DEPLOYED_GITHUB_PATH='.'
           npm run build
 
       - name: Fix permissions
