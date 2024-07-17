@@ -40,7 +40,7 @@ jobs:
           echo "BASE_PATH=/$(echo $GITHUB_REPOSITORY | cut -d '/' -f 2)" >> $GITHUB_ENV
           echo $GITHUB_ENV
       
-          - name: Build with Next.js
+      - name: Build with Next.js
         working-directory: estimeet
         run: |
           export NODE_ENV=production
