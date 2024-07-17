@@ -23,9 +23,9 @@ const HomePage = () => {
 
   const handleSendEmail = () => {
     const emails = emailList.split(',').map(email => email.trim());
-    console.log('Envoyer le compte rendu à :', emails);
-    console.log('Compte rendu :', meetingNotes);
-    alert('Compte rendu envoyé aux emails spécifiés.');
+    console.log("Envoyer l'invitation à :", emails);
+    console.log('ordre du jours :', meetingNotes);
+    alert("L'invitation envoyé aux emails spécifiés.");
   };
 
   return (
@@ -51,7 +51,7 @@ const HomePage = () => {
         className="email-input"
       />
       <button onClick={handleSendEmail} className="send-button">
-        Envoyer le compte rendu
+        Envoyer l'invitation
       </button>
 
       <RoleList fetchRoles={fetchRoles} />
