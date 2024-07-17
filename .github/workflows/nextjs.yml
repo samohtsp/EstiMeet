@@ -21,16 +21,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # - name: Print current directory and list files
-      #   run: |
-      #     pwd
-      #     ls -la
-      #     ls -la estimeet
-
       - name: Detect package manager
         id: detect-package-manager
         run: |
-          echo "Current directory: $(pwd)"
           if [ -f "estimeet/yarn.lock" ]; then
             echo "manager=yarn" >> $GITHUB_ENV
             echo "command=install" >> $GITHUB_ENV
@@ -69,7 +62,7 @@ jobs:
       - name: Build with Next.js
         working-directory: estimeet
         run: |
-          export DEPLOYED_GITHUB_PATH='/Estimeet'
+          export NODE_ENV=production
           npx next build
 
       - name: Upload artifact

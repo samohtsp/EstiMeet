@@ -3,8 +3,8 @@
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
-    basePath:  process.env.DEPLOYED_GITHUB_PATH || '/Estimeet',
-    assetPrefix:  process.env.DEPLOYED_GITHUB_PATH || '/Estimeet/',
+    basePath: process.env.NODE_ENV === 'production' ? '/Estimeet' : '',
+    assetPrefix: process.env.NODE_ENV === 'production' ? '/Estimeet' : '',
     trailingSlash: true,
     output: 'export'
 };
