@@ -6,6 +6,9 @@ const nextConfig = {
     basePath: process.env.NODE_ENV === 'production' ? '/Estimeet' : '',
     assetPrefix: process.env.NODE_ENV === 'production' ? '/Estimeet' : '',
     trailingSlash: true,
-    output: 'export'
+    output: 'export',
+    images: {
+        unoptimized: true,
+    },
 };
 export default nextConfig;
