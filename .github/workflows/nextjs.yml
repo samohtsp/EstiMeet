@@ -63,6 +63,7 @@ jobs:
         working-directory: estimeet
         run: |
           export NODE_ENV=production
+          export DEPLOYED_GITHUB_PATH='EstiMeet'
           npx next build
 
       - name: Upload artifact
