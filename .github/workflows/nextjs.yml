@@ -36,9 +36,11 @@ jobs:
         run: npm list
 
       - name: Extract repository name
-        run: echo "BASE_PATH=/$(echo $GITHUB_REPOSITORY | cut -d '/' -f 2)" >> $GITHUB_ENV
-  
-      - name: Build with Next.js
+        run: |
+          echo "BASE_PATH=/$(echo $GITHUB_REPOSITORY | cut -d '/' -f 2)" >> $GITHUB_ENV
+          echo $GITHUB_ENV
+      
+          - name: Build with Next.js
         working-directory: estimeet
         run: |
           export NODE_ENV=production
@@ -47,10 +49,10 @@ jobs:
 
       - name: Fix permissions
         run: |
-          chmod -c -R +rX "_site/" | while read line; do
+          chmod -c -R +rX "$GITHUB_ENV" | while read line; do
           echo "::warning title=Invalid file permissions automatically fixed::$line"
           done
-          
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
