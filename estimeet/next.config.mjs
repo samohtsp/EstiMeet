@@ -4,7 +4,7 @@
 
 const nextConfig = {
     basePath:  process.env.DEPLOYED_GITHUB_PATH || '/Estimeet',
-    assetPrefix: '/Estimeet/',
+    assetPrefix:  process.env.DEPLOYED_GITHUB_PATH || '/Estimeet/',
     trailingSlash: true,
     output: 'export'
 };

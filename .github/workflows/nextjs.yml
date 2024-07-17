@@ -21,11 +21,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Print current directory and list files
-        run: |
-          pwd
-          ls -la
-          ls -la estimeet
+      # - name: Print current directory and list files
+      #   run: |
+      #     pwd
+      #     ls -la
+      #     ls -la estimeet
 
       - name: Detect package manager
         id: detect-package-manager
@@ -52,6 +52,11 @@ jobs:
         working-directory: estimeet
         run: npm ci
 
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+        with:
+          static_site_generator: next
+
       - name: Check installed packages
         working-directory: estimeet
         run: |
@@ -63,7 +68,9 @@ jobs:
 
       - name: Build with Next.js
         working-directory: estimeet
-        run: npx next build
+        run: |
+          export DEPLOYED_GITHUB_PATH='/Estimeet'
+          npx next build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
