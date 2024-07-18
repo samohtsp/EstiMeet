@@ -51,7 +51,7 @@ const HomePage = () => {
         className="email-input"
       />
       <button onClick={handleSendEmail} className="send-button">
-        Envoyer l&apos; invitation
+        Envoyer l&apos;invitation
       </button>
 
       <RoleList fetchRoles={fetchRoles} />
