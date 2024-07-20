@@ -1,6 +1,6 @@
 // src/app/HomePage.tsx
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import RoleList from "../components/RoleList.component/RoleList";
 import MeetingCostCalculator from "../components/MeetingCostCalculator.component/MeetingCostCalculator";
 import { Role } from "../models/role";
@@ -17,18 +17,24 @@ const HomePage = () => {
   const [meetingNotes, setMeetingNotes] = useState("");
   const [meetingTitle, setMeetingTitle] = useState("");
   const [emailList, setEmailList] = useState("");
-  const [duration, setDuration] = useState({ hours: 0, minutes: 0 });
+  const [duration, setDuration] = useState({ hours: 1, minutes: 0 }); // Valeur par défaut initialisée
   const [roles, setRoles] = useState<Role[]>([]);
+  const [durationError, setDurationError] = useState<string | null>(null); // Pour gérer les erreurs de durée
 
   const handleSendEmail = () => {
     const emails = emailList.split(",").map((email) => email.trim());
     console.log("Envoyer l'invitation à :", emails);
-    console.log("ordre du jours :", meetingNotes);
-    alert("L'invitation envoyé aux emails spécifiés.");
+    console.log("Ordre du jour :", meetingNotes);
+    alert("L'invitation envoyée aux emails spécifiés.");
   };
 
   const handleDurationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const [hours, minutes] = e.target.value.split(":").map(Number);
+    if (isNaN(hours) || isNaN(minutes)) {
+      setDurationError("Veuillez entrer une durée valide.");
+      return;
+    }
+    setDurationError(null); // Réinitialiser l'erreur
     setDuration({ hours, minutes });
   };
 
@@ -51,11 +57,13 @@ const HomePage = () => {
         <span>Durée </span>
         <input
           type="time"
-          value="01:00"
-          required
+          value={`${String(duration.hours).padStart(2, "0")}:${String(
+            duration.minutes
+          ).padStart(2, "0")}`}
           className="duration-input"
           onChange={handleDurationChange}
         />
+        {durationError && <div className="error-message">{durationError}</div>}
       </div>
 
       <input
