@@ -1,18 +1,15 @@
-// src/components/HomePage.tsx
+// src/app/HomePage.tsx
 "use client";
-
-import React, { useState } from "react";
-// import '../styles/globals.css';
+import React, { useState, useEffect } from "react";
 import RoleList from "../components/RoleList.component/RoleList";
+import MeetingCostCalculator from "../components/MeetingCostCalculator.component/MeetingCostCalculator";
 import { Role } from "../models/role";
 
 const fetchRoles = async (): Promise<Role[]> => {
-  // Simuler la récupération de rôles depuis le backend ou le store
-  // Remplacez cette partie par la logique réelle de récupération des données
   return [
-    { title: "Manager", price: 500 },
-    { title: "Developer", price: 400 },
-    { title: "Tech Lead", price: 450 },
+    { title: "Manager", price: 500, iteration: 1 },
+    { title: "Developer", price: 400, iteration: 1 },
+    { title: "Tech Lead", price: 450, iteration: 1 },
   ];
 };
 
@@ -20,12 +17,19 @@ const HomePage = () => {
   const [meetingNotes, setMeetingNotes] = useState("");
   const [meetingTitle, setMeetingTitle] = useState("");
   const [emailList, setEmailList] = useState("");
+  const [duration, setDuration] = useState({ hours: 0, minutes: 0 });
+  const [roles, setRoles] = useState<Role[]>([]);
 
   const handleSendEmail = () => {
     const emails = emailList.split(",").map((email) => email.trim());
     console.log("Envoyer l'invitation à :", emails);
     console.log("ordre du jours :", meetingNotes);
     alert("L'invitation envoyé aux emails spécifiés.");
+  };
+
+  const handleDurationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const [hours, minutes] = e.target.value.split(":").map(Number);
+    setDuration({ hours, minutes });
   };
 
   return (
@@ -43,7 +47,17 @@ const HomePage = () => {
         value={meetingNotes}
         onChange={(e) => setMeetingNotes(e.target.value)}
       />
-      <input type="time" required className="duration-input" />
+      <div>
+        <span>Durée </span>
+        <input
+          type="time"
+          value="01:00"
+          required
+          className="duration-input"
+          onChange={handleDurationChange}
+        />
+      </div>
+
       <input
         type="text"
         placeholder="Emails (séparés par des virgules)"
@@ -55,7 +69,8 @@ const HomePage = () => {
         Envoyer l&apos;invitation
       </button>
 
-      <RoleList fetchRoles={fetchRoles} />
+      <RoleList fetchRoles={fetchRoles} onRolesChange={setRoles} />
+      <MeetingCostCalculator roles={roles} duration={duration} />
     </div>
   );
 };

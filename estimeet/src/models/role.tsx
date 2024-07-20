@@ -1,7 +1,7 @@
-// src/types/role.ts
+// src/models/role.ts
 
 export type Role = {
-    title: string;
-    price: number;
-  };
-  
+  iteration: number;
+  title: string;
+  price: number;
+};

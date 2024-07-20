@@ -1,0 +1,7 @@
+.role-input,
+.price-input,
+.add-role-button {
+  margin: 10px 0;
+  padding: 10px;
+  width: 300px;
+}

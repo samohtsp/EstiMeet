@@ -4,29 +4,42 @@ import "./RoleElement.css";
 
 type RoleElementProps = {
   role: Role;
-  onChangePriceRole: (newRole: Role) => void; // Fonction de rappel pour changer le prix un rôle
+  onChangePriceRole: (newRole: Role) => void;
+  onChangeIterationRole: (newRole: Role) => void;
   onDeleteRole: () => void;
 };
 
 const RoleElement: React.FC<RoleElementProps> = ({
   role,
   onChangePriceRole,
+  onChangeIterationRole,
   onDeleteRole,
 }) => {
-  const [newRolePrice, setNewRolePrice] = useState(role.price.toString());
+  const [newRolePrice, setNewRolePrice] = useState(role.price);
+  const [newRoleIteration, setNewRoleIteration] = useState(role.iteration);
 
-  const handleRolePriceChange = () => {
-    if (newRolePrice) {
-      const newRole: Role = {
-        title: role.title,
-        price: parseInt(newRolePrice),
-      };
-      onChangePriceRole(newRole);
-    }
+  const handleRolePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const updatedPrice = Number(e.target.value);
+    setNewRolePrice(updatedPrice);
+    onChangePriceRole({ ...role, price: updatedPrice });
+  };
+
+  const handleRoleIterationChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const updatedIteration = Number(e.target.value);
+    setNewRoleIteration(updatedIteration);
+    onChangeIterationRole({ ...role, iteration: updatedIteration });
   };
 
   return (
     <div className="role-element">
+      <input
+        type="number"
+        placeholder="Iteration"
+        value={newRoleIteration}
+        onChange={handleRoleIterationChange}
+      />
       {role.title} -
       <input
         type="number"

@@ -1,39 +1,46 @@
 // src/components/RoleList.tsx
 import React, { useEffect, useState } from "react";
 import { Role } from "../../models/role";
-import "./RoleList.css"; // Importez le fichier CSS associé
+import "./RoleList.css";
 import RoleInput from "../RoleInput.component/RoleInput";
 import RoleElement from "../RoleElement.component/RoleElement";
 
 type RoleListProps = {
-  fetchRoles: () => Promise<Role[]>; // Fonction pour récupérer les rôles depuis le backend ou le store
+  fetchRoles: () => Promise<Role[]>;
+  onRolesChange: (roles: Role[]) => void; // Fonction de rappel pour remonter les rôles
 };
 
-const RoleList: React.FC<RoleListProps> = ({ fetchRoles }) => {
+const RoleList: React.FC<RoleListProps> = ({ fetchRoles, onRolesChange }) => {
   const [roles, setRoles] = useState<Role[]>([]);
 
   useEffect(() => {
     const loadRoles = async () => {
       const fetchedRoles = await fetchRoles();
       setRoles(fetchedRoles);
+      onRolesChange(fetchedRoles); // Remonter les rôles lors du chargement initial
     };
 
     loadRoles();
-  }, [fetchRoles]);
+  }, [fetchRoles, onRolesChange]);
 
   const handleAddRole = (newRole: Role) => {
-    setRoles([...roles, newRole]);
+    const updatedRoles = [...roles, newRole];
+    setRoles(updatedRoles);
+    onRolesChange(updatedRoles); // Remonter les rôles après ajout
   };
 
-  const handleRolePriceChange = (index: number, newRole: Role) => {
+  const handleRoleChange = (index: number, newRole: Role) => {
     const updatedRoles = [...roles];
     updatedRoles[index] = newRole;
     setRoles(updatedRoles);
+    console.log(updatedRoles);
+    onRolesChange(updatedRoles); // Remonter les rôles après modification du prix
   };
 
   const handleDeleteRole = (index: number) => {
     const updatedRoles = roles.filter((_, i) => i !== index);
     setRoles(updatedRoles);
+    onRolesChange(updatedRoles); // Remonter les rôles après suppression
   };
 
   return (
@@ -46,7 +53,10 @@ const RoleList: React.FC<RoleListProps> = ({ fetchRoles }) => {
               <RoleElement
                 role={role}
                 onChangePriceRole={(newRole) =>
-                  handleRolePriceChange(index, newRole)
+                  handleRoleChange(index, newRole)
+                }
+                onChangeIterationRole={(newRole) =>
+                  handleRoleChange(index, newRole)
                 }
                 onDeleteRole={() => handleDeleteRole(index)}
               />
@@ -56,7 +66,6 @@ const RoleList: React.FC<RoleListProps> = ({ fetchRoles }) => {
       ) : (
         <div>
           <h4>Aucun rôle défini. Ajoutez un nouveau rôle :</h4>
-          <RoleInput onAddRole={handleAddRole} />
         </div>
       )}
       <div>
