@@ -4,6 +4,8 @@
 import React, { useEffect, useState } from 'react';
 import { Role } from '../../models/role';
 import './RoleList.css'; // Importez le fichier CSS associé
+import RoleInpunt from '../RoleInput.component/RoleInput'
+import RoleInput from '../RoleInput.component/RoleInput';
 
 type RoleListProps = {
   fetchRoles: () => Promise<Role[]>; // Fonction pour récupérer les rôles depuis le backend ou le store
@@ -58,45 +60,14 @@ const RoleList: React.FC<RoleListProps> = ({ fetchRoles }) => {
           </ul>
           <div>
             <h4>Ajoutez un rôle :</h4>
-            <input
-              type="text"
-              placeholder="Titre du rôle"
-              value={newRoleTitle}
-              onChange={(e) => setNewRoleTitle(e.target.value)}
-              className="role-input"
-            />
-            <input
-              type="number"
-              placeholder="Prix"
-              value={newRolePrice}
-              onChange={(e) => setNewRolePrice(e.target.value)}
-              className="price-input"
-            />
-            <button onClick={handleAddRole} className="add-role-button">
-              Ajouter le rôle
-            </button>
+            <RoleInput fetchRoles={fetchRoles} />
           </div>
         </>
       ) : (
         <div>
           <h4>Aucun rôle défini. Ajoutez un nouveau rôle :</h4>
-          <input
-            type="text"
-            placeholder="Titre du rôle"
-            value={newRoleTitle}
-            onChange={(e) => setNewRoleTitle(e.target.value)}
-            className="role-input"
-          />
-          <input
-            type="number"
-            placeholder="Prix"
-            value={newRolePrice}
-            onChange={(e) => setNewRolePrice(e.target.value)}
-            className="price-input"
-          />
-          <button onClick={handleAddRole} className="add-role-button">
-            Ajouter le rôle
-          </button>
+          <RoleInput fetchRoles={fetchRoles} />
+          
         </div>
       )}
     </div>
