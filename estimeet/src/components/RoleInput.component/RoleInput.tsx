@@ -1,22 +1,27 @@
 // src/components/RoleInput.component/RoleInput.tsx
-import React, { useState } from 'react';
-import { Role } from '../../models/role';
+"use client";
+
+import React, { useState } from "react";
+import { Role } from "../../models/role";
+import "./RoleInput.css";
 
 type RoleInputProps = {
-  fetchRoles: () => Promise<Role[]>;
-  onAddRole: (newRole: Role) => void; // Fonction de rappel pour ajouter un rôle
+  onAddRole: (newRole: Role) => void;
 };
 
-const RoleInput: React.FC<RoleInputProps> = ({ fetchRoles, onAddRole }) => {
-  const [newRoleTitle, setNewRoleTitle] = useState('');
-  const [newRolePrice, setNewRolePrice] = useState('');
+const RoleInput: React.FC<RoleInputProps> = ({ onAddRole }) => {
+  const [newRoleTitle, setNewRoleTitle] = useState("");
+  const [newRolePrice, setNewRolePrice] = useState("");
 
   const handleAddRole = () => {
     if (newRoleTitle && newRolePrice) {
-      const newRole: Role = { title: newRoleTitle, price: parseInt(newRolePrice) };
+      const newRole: Role = {
+        title: newRoleTitle,
+        price: parseInt(newRolePrice),
+      };
       onAddRole(newRole);
-      setNewRoleTitle('');
-      setNewRolePrice('');
+      setNewRoleTitle("");
+      setNewRolePrice("");
     }
   };
 
