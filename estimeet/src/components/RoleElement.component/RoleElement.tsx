@@ -28,6 +28,9 @@ const RoleElement: React.FC<RoleElementProps> = ({
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
     const updatedIteration = Number(e.target.value);
+    if(updatedIteration==0){
+      updatedIteration++;
+    }
     setNewRoleIteration(updatedIteration);
     onChangeIterationRole({ ...role, iteration: updatedIteration });
   };
