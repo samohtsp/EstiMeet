@@ -36,6 +36,7 @@ const RoleElement: React.FC<RoleElementProps> = ({
     <div className="role-element">
       <input
         type="number"
+        min = "1"
         placeholder="Iteration"
         value={newRoleIteration}
         onChange={handleRoleIterationChange}
