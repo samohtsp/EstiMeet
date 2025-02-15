@@ -24,21 +24,29 @@ const RoleElement: React.FC<RoleElementProps> = ({
     onChangePriceRole({ ...role, price: updatedPrice });
   };
 
-  const handleRoleIterationChange = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const handleRoleIterationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const updatedIteration = Number(e.target.value);
     setNewRoleIteration(updatedIteration);
-    onChangeIterationRole({ ...role, iteration: updatedIteration });
+  };
+
+  const handleRoleIterationBlur = () => {
+    if (newRoleIteration < 1) {
+      setNewRoleIteration(1);
+      onChangeIterationRole({ ...role, iteration: 1 });
+    } else {
+      onChangeIterationRole({ ...role, iteration: newRoleIteration });
+    }
   };
 
   return (
     <div className="role-element">
       <input
         type="number"
+        min="1"
         placeholder="Iteration"
         value={newRoleIteration}
         onChange={handleRoleIterationChange}
+        onBlur={handleRoleIterationBlur}
       />
       {role.title} -
       <input

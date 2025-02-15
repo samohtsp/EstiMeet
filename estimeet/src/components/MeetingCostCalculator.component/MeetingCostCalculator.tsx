@@ -20,7 +20,7 @@ const MeetingCostCalculator: React.FC<MeetingCostCalculatorProps> = ({
 
     const calculatedTotalCost = roles.reduce((sum, role) => {
       const hourlyRate = role.price / 8; // Supposons une journée de travail de 8 heures
-      return sum + hourlyRate * totalHours * (role.iteration || 1);
+      return sum + hourlyRate * totalHours * role.iteration ;
     }, 0);
     console.log("Durée totale en heures : ", totalHours);
     console.log("Coût total calculé : ", calculatedTotalCost);
