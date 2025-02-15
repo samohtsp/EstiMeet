@@ -1,20 +1,21 @@
 // src/app/HomePage.tsx
+
 "use client";
+
 import React, { useState } from "react";
+
 import RoleList from "../components/RoleList.component/RoleList";
 import MeetingCostCalculator from "../components/MeetingCostCalculator.component/MeetingCostCalculator";
 import { Role } from "../models/role";
 
-const fetchRoles = async (): Promise<Role[]> => {
-  return [
-    { title: "Manager", price: 500, iteration: 1 },
-    { title: "Developer", price: 400, iteration: 1 },
-    { title: "Tech Lead", price: 450, iteration: 1 },
-  ];
-};
+const fetchRoles = async (): Promise<Role[]> => [
+  { title: "Manager", price: 500, iteration: 1 },
+  { title: "Developer", price: 400, iteration: 1 },
+  { title: "Tech Lead", price: 450, iteration: 1 },
+];
 
 const HomePage = () => {
-  const [meetingNotes, setMeetingNotes] = useState("");
+  const [meetingNotes, setMeetingNotes] = useState(" toto titi tata");
   const [meetingTitle, setMeetingTitle] = useState("");
   const [emailList, setEmailList] = useState("");
   const [duration, setDuration] = useState({ hours: 1, minutes: 0 }); // Valeur par défaut initialisée
